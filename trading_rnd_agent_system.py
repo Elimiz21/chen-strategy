@@ -17,16 +17,26 @@ Architecture:
   └── SRE/DevOps/Security Lead
 
 Usage:
-    python trading_rnd_agent_system.py
+    python trading_rnd_agent_system.py [init|<prompt>]
 
-Requirements:
-    pip install claude-agent-sdk
+Examples:
+    python trading_rnd_agent_system.py init           # Initialize docs
+    python trading_rnd_agent_system.py                # Init + show agent info
+    python trading_rnd_agent_system.py "Begin Phase 0"  # Custom prompt (displays info)
 """
 
 import asyncio
-from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
 from datetime import datetime
 from pathlib import Path
+from dataclasses import dataclass
+# Placeholder for future SDK integration
+@dataclass
+class AgentDefinition:
+    """Definition for a specialized agent."""
+    description: str
+    prompt: str
+    tools: list[str]
+    model: str = "sonnet"
 
 # =============================================================================
 # AGENT DEFINITIONS
@@ -519,48 +529,120 @@ def get_agent_definitions() -> dict[str, AgentDefinition]:
     """Return all agent definitions for the trading R&D system."""
     return {
         "pmo-governance": AgentDefinition(
-            description="PMO/Governance Lead - Project documentation, phase gates, backlog management, decision tracking, risk register, weekly reporting. Use for governance, documentation, and process enforcement.",
+            description="PMO/Governance Lead - Project documentation, phase gates, backlog management, decision tracking, risk register, weekly reporting.",
             prompt=PMO_GOVERNANCE_LEAD_PROMPT,
             tools=["Read", "Write", "Edit", "Glob", "Grep"],
             model="sonnet"
         ),
         "quant-research": AgentDefinition(
-            description="Quant Research Lead - Expert strategy design, baselines, alpha research, walk-forward testing. Use for strategy development and performance analysis.",
+            description="Quant Research Lead - Expert strategy design, baselines, alpha research, walk-forward testing.",
             prompt=QUANT_RESEARCH_LEAD_PROMPT,
             tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep"],
             model="sonnet"
         ),
         "data-platform": AgentDefinition(
-            description="Data & Research Platform Lead - Data pipelines, versioning, reproducibility infrastructure, data quality. Use for data engineering and research infrastructure.",
+            description="Data & Research Platform Lead - Data pipelines, versioning, reproducibility infrastructure, data quality.",
             prompt=DATA_PLATFORM_LEAD_PROMPT,
             tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep"],
             model="sonnet"
         ),
         "ml-stats": AgentDefinition(
-            description="ML/Stats Lead - Regime detection, meta-learning, calibration, statistical validation. Use for regime models and meta-allocation engines.",
+            description="ML/Stats Lead - Regime detection, meta-learning, calibration, statistical validation.",
             prompt=ML_STATS_LEAD_PROMPT,
             tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep"],
             model="sonnet"
         ),
         "execution-engineering": AgentDefinition(
-            description="Execution & Trading Engineering Lead - Cost models, trading systems, execution, fail-safes. Use for trading infrastructure and cost modeling.",
+            description="Execution & Trading Engineering Lead - Cost models, trading systems, execution, fail-safes.",
             prompt=EXECUTION_ENGINEERING_LEAD_PROMPT,
             tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep"],
             model="sonnet"
         ),
         "independent-validation": AgentDefinition(
-            description="Independent Validation Lead - VETO AUTHORITY. Replication, model risk, sign-off on phase gates. Use for validation and must sign-off before paper/live trading.",
+            description="Independent Validation Lead - VETO AUTHORITY. Replication, model risk, sign-off on phase gates.",
             prompt=INDEPENDENT_VALIDATION_LEAD_PROMPT,
             tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep"],
             model="opus"  # Most capable model for critical validation
         ),
         "sre-devops": AgentDefinition(
-            description="SRE/DevOps/Security Lead - Infrastructure, monitoring, alerting, security, CI/CD. Use for operational infrastructure and incident response.",
+            description="SRE/DevOps/Security Lead - Infrastructure, monitoring, alerting, security, CI/CD.",
             prompt=SRE_DEVOPS_LEAD_PROMPT,
             tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep"],
             model="sonnet"
         )
     }
+
+
+def display_agent_info():
+    """Display information about the agent system and available agents."""
+    agents = get_agent_definitions()
+
+    print("\n" + "=" * 70)
+    print("ADAPTIVE TRADING R&D - MULTI-AGENT SYSTEM")
+    print("=" * 70)
+    print(f"\nInitialized: {datetime.now().isoformat()}")
+    print("\n" + "-" * 70)
+    print("ARCHITECTURE")
+    print("-" * 70)
+    print("""
+COO Orchestrator Agent (coordinates all streams)
+│
+├── PMO/Governance Lead ────── Documentation, phase gates, backlog
+├── Quant Research Lead ────── Expert strategies, baselines, alpha
+├── Data Platform Lead ─────── Data pipelines, versioning, quality
+├── ML/Stats Lead ──────────── Regime detection, meta-allocation
+├── Execution Engineering ──── Cost models, trading systems
+├── Independent Validation ─── VETO AUTHORITY, replication, risk
+└── SRE/DevOps Lead ────────── Infrastructure, monitoring, security
+""")
+
+    print("-" * 70)
+    print("AVAILABLE AGENTS")
+    print("-" * 70)
+    for name, agent in agents.items():
+        print(f"\n  [{agent.model.upper()}] {name}")
+        print(f"    {agent.description}")
+        print(f"    Tools: {', '.join(agent.tools)}")
+
+    print("\n" + "-" * 70)
+    print("PHASES (NEVER SKIP GATES)")
+    print("-" * 70)
+    phases = [
+        "Phase 0: Charter + success definition",
+        "Phase 1: Literature + design-space map + replication plan",
+        "Phase 2: Data foundation + reproducible research stack",
+        "Phase 3: Expert library + baselines + unified cost model",
+        "Phase 4: Regime definitions + detectors (stability + calibration)",
+        "Phase 5: Meta-allocation engines (turnover/cost-aware)",
+        "Phase 6: Independent validation + robustness + replication proof",
+        "Phase 7: Paper trading + monitoring/runbooks + 30-day test",
+        "Phase 8: Limited live pilot (ONLY after Phase 7 PASS)",
+    ]
+    for phase in phases:
+        print(f"  {phase}")
+
+    print("\n" + "-" * 70)
+    print("LIVING DOCUMENTS (in docs/)")
+    print("-" * 70)
+    docs = [
+        "Strategy_Charter.md      - Hypothesis, scope, baselines, metrics",
+        "Phase_Gates_Checklist.md - Deliverables + PASS/FAIL per phase",
+        "Backlog.csv              - Task tracking with dependencies",
+        "Decision_Log.md          - All decisions with rationale",
+        "Risk_Register.md         - Risks, mitigations, owners",
+        "Experiment_Registry.md   - Pre-registered experiments",
+        "Weekly_Report.md         - Progress, results, next week plan",
+    ]
+    for doc in docs:
+        print(f"  {doc}")
+
+    print("\n" + "=" * 70)
+    print("STATUS: Ready for Phase 0")
+    print("=" * 70)
+    print("\nNote: Full agent orchestration requires the Claude Agent SDK.")
+    print("Currently running in standalone mode (document initialization only).")
+    print("\nTo proceed with Phase 0, review and complete the documents in docs/")
+    print("=" * 70 + "\n")
 
 
 # =============================================================================
@@ -1339,40 +1421,27 @@ async def initialize_project():
 
 
 async def run_coo_agent(prompt: str):
-    """Run the COO orchestrator agent with the full team."""
+    """
+    Run the COO orchestrator agent with the full team.
 
+    Note: Full orchestration requires the Claude Agent SDK.
+    This standalone version displays agent info and the prompt.
+    """
     print(f"\n{'='*60}")
-    print("ADAPTIVE TRADING R&D - COO AGENT SYSTEM")
+    print("COO AGENT - PROMPT RECEIVED")
     print(f"{'='*60}")
-    print(f"Started: {datetime.now().isoformat()}")
-    print(f"Prompt: {prompt[:100]}...")
+    print(f"Timestamp: {datetime.now().isoformat()}")
+    print(f"\nPrompt: {prompt}")
     print(f"{'='*60}\n")
 
-    async for message in query(
-        prompt=prompt,
-        options=ClaudeAgentOptions(
-            system_prompt=COO_ORCHESTRATOR_PROMPT,
-            allowed_tools=["Read", "Write", "Edit", "Bash", "Glob", "Grep", "Task"],
-            agents=get_agent_definitions(),
-            permission_mode="acceptEdits"
-        )
-    ):
-        # Log agent activity
-        if hasattr(message, 'content'):
-            for block in message.content:
-                if hasattr(block, 'type') and block.type == 'tool_use':
-                    if block.name == 'Task':
-                        agent_type = block.input.get('subagent_type', 'unknown')
-                        print(f"[COO] Delegating to: {agent_type}")
-                elif hasattr(block, 'text'):
-                    print(block.text)
-
-        # Final result
-        if hasattr(message, "result"):
-            print(f"\n{'='*60}")
-            print("SESSION COMPLETE")
-            print(f"{'='*60}")
-            print(message.result)
+    # Display what would happen with full SDK
+    print("In full SDK mode, the COO would:")
+    print("  1. Parse the prompt and identify required actions")
+    print("  2. Delegate to appropriate stream leads via Task tool")
+    print("  3. Coordinate responses and update living documents")
+    print("  4. Enforce phase gates and research hygiene")
+    print("\nFor now, please manually review/edit the docs/ files.")
+    print(f"{'='*60}\n")
 
 
 async def main():
@@ -1381,20 +1450,19 @@ async def main():
 
     if len(sys.argv) > 1:
         if sys.argv[1] == "init":
+            # Just initialize
             await initialize_project()
         else:
-            # Run with custom prompt
+            # Custom prompt - init if needed, then show prompt info
+            docs_dir = Path("docs")
+            if not docs_dir.exists():
+                await initialize_project()
             prompt = " ".join(sys.argv[1:])
             await run_coo_agent(prompt)
     else:
-        # Default: Initialize and start Phase 0
+        # Default: Initialize and display system info
         await initialize_project()
-        await run_coo_agent(
-            "Begin Phase 0. Create all Week 0 deliverables: "
-            "Strategy Charter, Phase Gates Checklist, Backlog, "
-            "Decision Log, Risk Register, Experiment Registry, "
-            "and Weekly Report. Delegate to appropriate stream leads."
-        )
+        display_agent_info()
 
 
 if __name__ == "__main__":

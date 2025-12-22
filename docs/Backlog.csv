@@ -1,0 +1,57 @@
+id,stream,owner,priority,dependency,acceptance_test,due_week,status
+1,PMO,pmo-governance,P0,,Strategy_Charter.md complete with QQQ focus,0,complete
+2,PMO,pmo-governance,P0,,Phase_Gates_Checklist.md complete,0,complete
+3,PMO,pmo-governance,P0,,Backlog.csv seeded for all phases,0,complete
+4,PMO,pmo-governance,P0,,Decision_Log.md initialized with QQQ decision,0,complete
+5,PMO,pmo-governance,P0,,Risk_Register.md initialized with QQQ risks,0,complete
+6,PMO,pmo-governance,P0,,Weekly_Report.md Week 0 complete,0,in_progress
+7,PMO,pmo-governance,P0,,Experiment_Registry.md initialized,0,complete
+8,Quant,quant-research,P1,1,QQQ historical regime analysis (2000-2024),1,pending
+9,Quant,quant-research,P1,8,TA indicator effectiveness literature review,1,pending
+10,ML,ml-stats,P1,8,Regime detection approaches survey,1,pending
+11,Quant,quant-research,P1,9,20+ TA expert strategy specifications,2,pending
+12,Quant,quant-research,P1,11,Baseline strategy specifications,2,pending
+13,Data,data-platform,P1,,QQQ data source evaluation (Yahoo/Alpha Vantage/etc),1,pending
+14,Data,data-platform,P2,13,QQQ OHLCV data pipeline implementation,2,pending
+15,Data,data-platform,P2,14,Dataset versioning system (SHA-256 hashes),2,pending
+16,Data,data-platform,P2,15,Research environment setup (Python/TA-Lib),3,pending
+17,Data,data-platform,P2,16,Backtesting framework implementation,3,pending
+18,Validation,independent-validation,P1,17,Data quality validation - no look-ahead,3,pending
+19,Exec,execution-engineering,P1,13,QQQ cost model design ($0 commission + spread),2,pending
+20,Exec,execution-engineering,P1,19,Cost model implementation,3,pending
+21,Validation,independent-validation,P1,20,Cost model validation,3,pending
+22,Quant,quant-research,P2,17;20,QQQ buy-and-hold baseline implementation,4,pending
+23,Quant,quant-research,P2,22,200-day MA baseline implementation,4,pending
+24,Quant,quant-research,P2,22,Golden Cross baseline implementation,4,pending
+25,Quant,quant-research,P2,22,RSI baseline implementation,4,pending
+26,Quant,quant-research,P2,22,Vol-targeting baseline implementation,4,pending
+27,Quant,quant-research,P2,17;20,Trend-following TA experts (6 strategies),5,pending
+28,Quant,quant-research,P2,17;20,Mean-reversion TA experts (5 strategies),5,pending
+29,Quant,quant-research,P2,17;20,Volatility-based TA experts (3 strategies),5,pending
+30,Quant,quant-research,P2,17;20,Volume-based TA experts (3 strategies),5,pending
+31,ML,ml-stats,P2,16;27-30,QQQ regime definition (trend/mr/vol),6,pending
+32,ML,ml-stats,P2,31,Regime detector v1 implementation,6,pending
+33,ML,ml-stats,P2,32,Regime detector calibration,7,pending
+34,Validation,independent-validation,P1,33,Regime detector no look-ahead verification,7,pending
+35,Quant,quant-research,P2,33;34,Expert-regime performance matrix,7,pending
+36,ML,ml-stats,P2,35,Meta-allocation engine v1 (25% DD constraint),8,pending
+37,ML,ml-stats,P2,36,Turnover penalty implementation,8,pending
+38,ML,ml-stats,P2,37,Tilt-not-switch logic implementation,8,pending
+39,Quant,quant-research,P2,38,Performance analysis vs baselines,9,pending
+40,ML,ml-stats,P2,39,Ablation studies,9,pending
+41,Validation,independent-validation,P0,40,Full replication from clean environment,10,pending
+42,Validation,independent-validation,P0,41,Subperiod stability analysis,10,pending
+43,Validation,independent-validation,P0,42,Parameter sensitivity analysis,10,pending
+44,Validation,independent-validation,P0,43,Cost sensitivity analysis (2x/3x),11,pending
+45,Validation,independent-validation,P0,44,25% DD stress testing,11,pending
+46,Validation,independent-validation,P0,45,Model risk assessment and sign-off,11,pending
+47,Exec,execution-engineering,P2,46,Paper trading system implementation,12,pending
+48,Exec,execution-engineering,P2,47,25% DD fail-safe implementation,12,pending
+49,SRE,sre-devops,P2,48,Monitoring dashboard,12,pending
+50,SRE,sre-devops,P2,49,Alerting configuration,12,pending
+51,Exec,execution-engineering,P2,50,30-day paper trading execution,13-16,pending
+52,Validation,independent-validation,P0,51,Paper vs backtest comparison and sign-off,16,pending
+53,Exec,execution-engineering,P2,52,Live trading system preparation,17,pending
+54,Exec,execution-engineering,P2,53,$125K max loss fail-safe (25% of $500K),17,pending
+55,SRE,sre-devops,P2,54,Live monitoring and incident response,17,pending
+56,Quant,quant-research,P2,55,Live performance tracking,18+,pending
