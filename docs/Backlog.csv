@@ -4,12 +4,12 @@ id,stream,owner,priority,dependency,acceptance_test,due_week,status
 3,PMO,pmo-governance,P0,,Backlog.csv seeded for all phases,0,complete
 4,PMO,pmo-governance,P0,,Decision_Log.md initialized with QQQ decision,0,complete
 5,PMO,pmo-governance,P0,,Risk_Register.md initialized with QQQ risks,0,complete
-6,PMO,pmo-governance,P0,,Weekly_Report.md Week 0 complete,0,in_progress
+6,PMO,pmo-governance,P0,,Weekly_Report.md Week 1 complete,1,complete
 7,PMO,pmo-governance,P0,,Experiment_Registry.md initialized,0,complete
-8,Quant,quant-research,P1,1,QQQ historical regime analysis (2000-2024),1,pending
-9,Quant,quant-research,P1,8,TA indicator effectiveness literature review,1,pending
-10,ML,ml-stats,P1,8,Regime detection approaches survey,1,pending
-11,Quant,quant-research,P1,9,20+ TA expert strategy specifications,2,pending
+8,Quant,quant-research,P1,1,QQQ historical regime analysis (2000-2024),1,complete
+9,Quant,quant-research,P1,8,TA indicator effectiveness literature review,1,complete
+10,ML,ml-stats,P1,8,Regime detection approaches survey,1,complete
+11,Quant,quant-research,P1,9,20+ TA expert strategy specifications,2,in_progress
 12,Quant,quant-research,P1,11,Baseline strategy specifications,2,pending
 13,Data,data-platform,P1,,QQQ data source evaluation (Yahoo/Alpha Vantage/etc),1,pending
 14,Data,data-platform,P2,13,QQQ OHLCV data pipeline implementation,2,pending
@@ -17,7 +17,7 @@ id,stream,owner,priority,dependency,acceptance_test,due_week,status
 16,Data,data-platform,P2,15,Research environment setup (Python/TA-Lib),3,pending
 17,Data,data-platform,P2,16,Backtesting framework implementation,3,pending
 18,Validation,independent-validation,P1,17,Data quality validation - no look-ahead,3,pending
-19,Exec,execution-engineering,P1,13,QQQ cost model design ($0 commission + spread),2,pending
+19,Exec,execution-engineering,P1,13,QQQ cost model design (margin + borrow costs),2,pending
 20,Exec,execution-engineering,P1,19,Cost model implementation,3,pending
 21,Validation,independent-validation,P1,20,Cost model validation,3,pending
 22,Quant,quant-research,P2,17;20,QQQ buy-and-hold baseline implementation,4,pending
@@ -27,7 +27,7 @@ id,stream,owner,priority,dependency,acceptance_test,due_week,status
 26,Quant,quant-research,P2,22,Vol-targeting baseline implementation,4,pending
 27,Quant,quant-research,P2,17;20,Trend-following TA experts (6 strategies),5,pending
 28,Quant,quant-research,P2,17;20,Mean-reversion TA experts (5 strategies),5,pending
-29,Quant,quant-research,P2,17;20,Volatility-based TA experts (3 strategies),5,pending
+29,Quant,quant-research,P2,17;20,Volatility-based TA experts (4 strategies),5,pending
 30,Quant,quant-research,P2,17;20,Volume-based TA experts (3 strategies),5,pending
 31,ML,ml-stats,P2,16;27-30,QQQ regime definition (trend/mr/vol),6,pending
 32,ML,ml-stats,P2,31,Regime detector v1 implementation,6,pending

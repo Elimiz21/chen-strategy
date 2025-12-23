@@ -1,45 +1,40 @@
 # Weekly Report
 ## Adaptive Regime-Aware Trading System - QQQ Focus
 
-### Report Period: Week 0
-### Date: 2025-12-22
+### Report Period: Week 1
+### Date: 2025-12-23
 
 ---
 
 ## Executive Summary
 
-Project initialized with full QQQ focus. All Week 0 deliverables complete: Strategy Charter defines $500K capital deployment on QQQ with 25% max drawdown constraint, comprehensive TA expert library (20+ indicators), and 8-phase development roadmap. Phase 0 near completion pending final sign-off.
+**Phase 0 PASSED.** Project charter finalized with expanded scope: $500K on QQQ with 25% max DD, 3x leverage allowed, shorting enabled, no turnover limit. Phase 1 now in progress focusing on QQQ historical regime analysis, TA indicator literature review, and regime detection approach survey.
 
 ---
 
 ## Progress vs Plan
 
-### Planned This Week
-| Task | Owner | Status | Notes |
-|------|-------|--------|-------|
-| Strategy_Charter.md | PMO | ✅ Complete | QQQ focus, $500K, 25% max DD |
-| Phase_Gates_Checklist.md | PMO | ✅ Complete | 8 phases defined |
-| Backlog.csv | PMO | ✅ Complete | 56 tasks for 17+ weeks |
-| Decision_Log.md | PMO | ✅ Complete | 8 decisions documented |
-| Risk_Register.md | PMO | ✅ Complete | 20 risks identified |
-| Experiment_Registry.md | PMO | ✅ Complete | 8 experiments pre-registered |
-| Weekly_Report.md | PMO | ✅ Complete | This document |
-
-### Completed This Week
+### Completed Since Last Report
 | Task | Owner | Evidence |
 |------|-------|----------|
-| QQQ scope definition | COO | Strategy_Charter.md §2 |
-| Success metrics (25% max DD) | PMO | Strategy_Charter.md §4 |
-| TA expert candidates (20+) | Quant | Strategy_Charter.md §7 |
-| Baseline definitions | Quant | Strategy_Charter.md §3 |
-| Cost model preliminary | Exec | Strategy_Charter.md §9 |
-| Risk identification | PMO | Risk_Register.md (20 risks) |
-| Experiment pre-registration | Quant/ML | Experiment_Registry.md (8 exp) |
+| Phase 0 gate sign-off | COO | Phase_Gates_Checklist.md |
+| Scope update: shorting allowed | User | DEC-005 updated |
+| Scope update: 3x leverage allowed | User | DEC-006 updated |
+| Scope update: no turnover limit | User | DEC-009 added |
+| Cost model updated (margin, borrow) | Exec Eng | Strategy_Charter.md §9 |
+
+### In Progress This Week
+| Task | Owner | Status | Notes |
+|------|-------|--------|-------|
+| QQQ historical regime analysis | Quant Research | 🔄 Starting | 2000-2024 analysis |
+| TA indicator literature review | Quant Research | 🔄 Starting | Effectiveness survey |
+| Regime detection approaches survey | ML/Stats | 🔄 Starting | HMM, rules, ML |
+| QQQ data source evaluation | Data Platform | ⬜ Pending | Yahoo, Polygon, etc. |
 
 ### Carried Forward
 | Task | Owner | Reason | New Due |
 |------|-------|--------|---------|
-| Phase 0 gate sign-off | COO | Awaiting stakeholder approval | Week 1 |
+| None | - | - | - |
 
 ---
 
@@ -47,26 +42,20 @@ Project initialized with full QQQ focus. All Week 0 deliverables complete: Strat
 
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
-| Tasks completed | 7 | 7 | ✅ |
-| Experiments registered | 1 | 8 | ✅ (ahead) |
-| Experiments completed | 0 | 0 | ✅ |
-| Blockers resolved | 0 | 0 | ✅ |
-| Decisions made | 5 | 8 | ✅ (ahead) |
-| Risks identified | 5 | 20 | ✅ (thorough) |
+| Phase gates passed | 1 | 1 | ✅ |
+| Tasks completed | 5 | 5 | ✅ |
+| Decisions made | 9 | 9 | ✅ |
+| Blockers resolved | 1 | 1 | ✅ (Phase 0 sign-off) |
 
 ---
 
-## Decisions Made
+## Decisions Made This Week
 
 | Decision | Rationale | Owner |
 |----------|-----------|-------|
-| DEC-002: QQQ only | Simplicity, liquidity, clean data | User |
-| DEC-003: $500K capital | Meaningful test, low market impact | User |
-| DEC-004: 25% max DD | Balance preservation with growth | User |
-| DEC-005: Long/cash only | Simpler, lower risk than shorting | COO |
-| DEC-006: No leverage | Incompatible with 25% DD constraint | COO |
-| DEC-007: Daily signals | Balance of responsiveness vs costs | COO |
-| DEC-008: All TA tools | Comprehensive testing of regime hypothesis | User |
+| DEC-005 (updated): Allow shorting | Profit from bear regimes, QQQ easy to borrow | User |
+| DEC-006 (updated): Allow 3x leverage | Amplify high-conviction signals | User |
+| DEC-009: No turnover limit | Costs captured in net metrics | User |
 
 (Full details in Decision_Log.md)
 
@@ -77,18 +66,14 @@ Project initialized with full QQQ focus. All Week 0 deliverables complete: Strat
 ### New Risks Identified
 | Risk | Impact | Likelihood | Mitigation |
 |------|--------|------------|------------|
-| R001 | 25% DD challenging while beating QQQ | M | M | More realistic target |
-| R002 | Regime detection accuracy insufficient | H | M | Multiple approaches |
-| R003 | No regime-dependent expert performance | H | M | Statistical testing |
-| R015 | QQQ tech concentration | M | H | Accept as feature |
-| R016 | QQQ higher volatility than SPY | M | H | Position sizing |
+| Leverage amplifies losses | H | M | 25% DD hard limit, position sizing |
+| Short squeeze risk | M | L | QQQ highly liquid, easy to borrow |
+| Margin calls with 3x leverage | H | M | Monitor margin utilization |
 
 ### Active Blockers
 | Blocker | Impact | Owner | Resolution Plan |
 |---------|--------|-------|-----------------|
 | None | - | - | - |
-
-(Full details in Risk_Register.md)
 
 ---
 
@@ -96,8 +81,8 @@ Project initialized with full QQQ focus. All Week 0 deliverables complete: Strat
 
 | Phase | Status | Notes |
 |-------|--------|-------|
-| Phase 0: Charter | 🔄 IN PROGRESS | All deliverables complete, awaiting sign-off |
-| Phase 1: Literature | ⬜ NOT STARTED | Blocked by Phase 0 |
+| Phase 0: Charter | ✅ PASSED | Signed off 2025-12-23 |
+| Phase 1: Literature | 🔄 IN PROGRESS | Started 2025-12-23 |
 | Phase 2: Data Foundation | ⬜ NOT STARTED | |
 | Phase 3: Expert Library | ⬜ NOT STARTED | |
 | Phase 4: Regime Detection | ⬜ NOT STARTED | |
@@ -110,21 +95,22 @@ Project initialized with full QQQ focus. All Week 0 deliverables complete: Strat
 ## Next Week Plan
 
 ### Goals
-1. Complete Phase 0 gate sign-off
-2. Begin Phase 1: QQQ historical regime analysis
-3. Evaluate QQQ data sources (Yahoo, Alpha Vantage, Polygon)
+1. Complete QQQ historical regime analysis (2000-2024)
+2. Complete TA indicator literature survey
+3. Identify 3+ regime detection approaches
+4. Decide on QQQ data source (DEC-010)
 
 ### Experiments Queued
 | Experiment ID | Hypothesis | Owner |
 |---------------|------------|-------|
-| EXP-001 | Baseline performance | Quant Research |
-| EXP-006 | Regime detection | ML/Stats |
+| EXP-001 | Baseline performance (will update for leverage/short) | Quant Research |
+| EXP-006 | Regime detection accuracy | ML/Stats |
 
 ### Decisions Needed
 | Topic | Options | Owner | Deadline |
 |-------|---------|-------|----------|
-| DEC-009: QQQ data source | Yahoo, Alpha Vantage, Polygon | Data Platform | Week 1 |
-| DEC-010: Backtesting framework | Custom, Backtrader, VectorBT | Data Platform | Week 2 |
+| DEC-010: QQQ data source | Yahoo, Alpha Vantage, Polygon | Data Platform | Week 1 |
+| DEC-011: Backtesting framework | Custom, Backtrader, VectorBT | Data Platform | Week 2 |
 
 ---
 
@@ -134,12 +120,13 @@ Project initialized with full QQQ focus. All Week 0 deliverables complete: Strat
 - [x] N/A - No data processing yet
 
 ### Experiment Registry
-- [x] All experiments pre-registered (8 total)
+- [x] All experiments pre-registered
 - [x] No completed experiments yet
 - [x] No "silent tuning" detected
 
 ### Cost Model
-- [x] Preliminary cost model defined (Strategy_Charter.md §9)
+- [x] Updated with margin interest (6-8% annual)
+- [x] Updated with borrow costs (0.5-1% annual)
 - [ ] Full implementation pending Phase 3
 
 ---
@@ -149,26 +136,38 @@ Project initialized with full QQQ focus. All Week 0 deliverables complete: Strat
 ### Stream Status
 | Stream | Lead | Status | Key Items |
 |--------|------|--------|-----------|
-| PMO/Governance | pmo-governance | 🟢 Active | Week 0 complete |
-| Quant Research | quant-research | ⬜ Standby | Awaiting Phase 1 |
-| Data Platform | data-platform | ⬜ Standby | Awaiting data decisions |
-| ML/Stats | ml-stats | ⬜ Standby | Awaiting Phase 4 |
+| PMO/Governance | pmo-governance | 🟢 Active | Phase 0 complete, Phase 1 started |
+| Quant Research | quant-research | 🟢 Active | Literature review starting |
+| Data Platform | data-platform | 🟡 Pending | Awaiting data source decision |
+| ML/Stats | ml-stats | 🟢 Active | Regime detection survey starting |
 | Execution Eng | execution-engineering | ⬜ Standby | Awaiting Phase 3 |
 | Validation | independent-validation | ⬜ Standby | Awaiting Phase 6 |
 | SRE/DevOps | sre-devops | ⬜ Standby | Awaiting Phase 7 |
 
 ---
 
-## QQQ Strategy Summary
+## QQQ Strategy Summary (Updated)
 
 | Parameter | Value |
 |-----------|-------|
 | Asset | QQQ (Nasdaq-100 ETF) |
 | Capital | $500,000 |
 | Max Drawdown | 25% ($125,000) |
-| Positions | Long QQQ or 100% Cash |
-| Leverage | None (1.0x) |
+| Positions | Long (up to 3x), Short (up to 3x), or Cash |
+| Leverage | Up to 3.0x |
+| Turnover | No limit |
 | Signal Frequency | Daily |
 | TA Experts | 20+ (all major indicators) |
 | Baselines | 5 (B&H, 200MA, Golden Cross, RSI, Vol-Target) |
 | Experiments | 8 pre-registered (~545 trials) |
+
+---
+
+## Week 0 Archive
+
+Previous week's report archived. Key accomplishments:
+- Project initialized with QQQ focus
+- All 7 living documents created
+- 8 decisions documented
+- 20 risks identified
+- 8 experiments pre-registered

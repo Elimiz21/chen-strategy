@@ -2,9 +2,9 @@
 ## Adaptive Regime-Aware Trading System - QQQ Focus
 
 ### Document Control
-- Version: 1.0
-- Last Updated: 2025-12-22
-- Status: PHASE 0 IN PROGRESS
+- Version: 1.1
+- Last Updated: 2025-12-23
+- Status: PHASE 1 IN PROGRESS
 
 ---
 
@@ -24,11 +24,11 @@
 
 ### Gate Criteria
 - [x] All deliverables complete
-- [x] Scope confirmed: QQQ only, $500K, 25% max DD
+- [x] Scope confirmed: QQQ only, $500K, 25% max DD, 3x leverage, shorting allowed
 - [x] Risk register initialized
-- [ ] Stakeholder sign-off obtained
+- [x] Stakeholder sign-off obtained (2025-12-23)
 
-### Gate Status: 🔄 IN PROGRESS
+### Gate Status: ✅ PASSED (2025-12-23)
 
 ---
 
@@ -50,7 +50,7 @@
 - [ ] 3+ regime detection approaches identified
 - [ ] Baseline strategies fully specified
 
-### Gate Status: ⬜ NOT STARTED
+### Gate Status: 🔄 IN PROGRESS (Started 2025-12-23)
 
 ---
 
