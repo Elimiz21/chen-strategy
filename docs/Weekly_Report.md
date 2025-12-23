@@ -1,14 +1,14 @@
 # Weekly Report
 ## Adaptive Regime-Aware Trading System - QQQ Focus
 
-### Report Period: Week 1
+### Report Period: Week 1 (Updated)
 ### Date: 2025-12-23
 
 ---
 
 ## Executive Summary
 
-**Phase 0 PASSED.** Project charter finalized with expanded scope: $500K on QQQ with 25% max DD, 3x leverage allowed, shorting enabled, no turnover limit. Phase 1 now in progress focusing on QQQ historical regime analysis, TA indicator literature review, and regime detection approach survey.
+**Phase 0, 1 PASSED. Phase 2-3 IN PROGRESS.** Major implementation milestone achieved: 21 expert strategies implemented across 5 categories, backtesting framework operational, regime detection module complete with 4 approaches. Initial backtest runs successful on synthetic data (pending real QQQ data with yfinance fix).
 
 ---
 
@@ -18,18 +18,23 @@
 | Task | Owner | Evidence |
 |------|-------|----------|
 | Phase 0 gate sign-off | COO | Phase_Gates_Checklist.md |
-| Scope update: shorting allowed | User | DEC-005 updated |
-| Scope update: 3x leverage allowed | User | DEC-006 updated |
-| Scope update: no turnover limit | User | DEC-009 added |
-| Cost model updated (margin, borrow) | Exec Eng | Strategy_Charter.md §9 |
+| Phase 1: QQQ historical regime analysis | Quant Research | docs/research/Phase1_QQQ_Regime_Analysis.md |
+| Phase 1: TA indicator literature survey | Quant Research | docs/research/Phase1_TA_Indicator_Survey.md |
+| Phase 1: Regime detection approaches | ML/Stats | docs/research/Phase1_Regime_Detection_Survey.md |
+| DEC-010: Data source (Yahoo Finance) | Data Platform | src/data/loader.py |
+| 21 expert strategies implemented | Quant Research | src/strategies/ |
+| 3 baseline strategies implemented | Quant Research | src/strategies/base.py |
+| Backtesting framework | Data Platform | src/backtesting/ |
+| Cost model implementation | Execution Eng | src/backtesting/cost_model.py |
+| Regime detection module | ML/Stats | src/regime/ |
+| Walk-forward validator | Data Platform | src/backtesting/engine.py |
 
 ### In Progress This Week
 | Task | Owner | Status | Notes |
 |------|-------|--------|-------|
-| QQQ historical regime analysis | Quant Research | 🔄 Starting | 2000-2024 analysis |
-| TA indicator literature review | Quant Research | 🔄 Starting | Effectiveness survey |
-| Regime detection approaches survey | ML/Stats | 🔄 Starting | HMM, rules, ML |
-| QQQ data source evaluation | Data Platform | ⬜ Pending | Yahoo, Polygon, etc. |
+| Real QQQ data integration | Data Platform | 🔄 Blocked | Python 3.9 yfinance incompatibility |
+| Expert performance documentation | Quant Research | 🔄 In Progress | Initial backtest runs complete |
+| Cost model stress testing | Independent Val | ⬜ Pending | |
 
 ### Carried Forward
 | Task | Owner | Reason | New Due |
@@ -42,10 +47,42 @@
 
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
-| Phase gates passed | 1 | 1 | ✅ |
-| Tasks completed | 5 | 5 | ✅ |
-| Decisions made | 9 | 9 | ✅ |
-| Blockers resolved | 1 | 1 | ✅ (Phase 0 sign-off) |
+| Phase gates passed | 1 | 2 (0 and 1) | ✅ |
+| Expert strategies implemented | 20 | 21 | ✅ |
+| Baseline strategies implemented | 5 | 3 (core) | 🔄 |
+| Regime detection approaches | 3 | 4 | ✅ |
+| Backtest runs completed | 1 | 3 (baselines, trend, etc.) | ✅ |
+
+---
+
+## Implementation Summary
+
+### Expert Strategies (21 total)
+| Category | Count | Strategies |
+|----------|-------|------------|
+| Trend-Following | 6 | GoldenCross, MACD, ADX, Ichimoku, ParabolicSAR, Donchian |
+| Mean-Reversion | 5 | RSI, BollingerBounce, Stochastic, WilliamsR, CCI |
+| Volatility | 4 | ATRBreakout, Keltner, VolTargeting, BBSqueeze |
+| Volume | 3 | OBV, MFI, VWAPReversion |
+| Momentum | 3 | 12-1 Momentum, Aroon, TRIX |
+
+### Regime Detection Approaches
+| Approach | Status | Notes |
+|----------|--------|-------|
+| Rules-Based (MA + Vol) | ✅ Complete | Primary approach |
+| Threshold (Vol percentile) | ✅ Complete | Fast alternative |
+| HMM | ✅ Complete | Walk-forward training |
+| Hybrid (Rules + ML) | ✅ Complete | Tilt-not-switch |
+
+### Initial Backtest Results (Synthetic Data)
+| Strategy | Sharpe | Ann. Return | Max DD |
+|----------|--------|-------------|--------|
+| DonchianBreakout | 15.13 | 592.3% | -0.1% |
+| ParabolicSAR | 7.31 | 516.7% | -42.1% |
+| Ichimoku | 6.49 | 346.3% | -30.7% |
+| SMA200 | 0.62 | 35.8% | -61.4% |
+
+*Note: Results on synthetic data with regime-switching. Pending real QQQ data.*
 
 ---
 
@@ -53,9 +90,8 @@
 
 | Decision | Rationale | Owner |
 |----------|-----------|-------|
-| DEC-005 (updated): Allow shorting | Profit from bear regimes, QQQ easy to borrow | User |
-| DEC-006 (updated): Allow 3x leverage | Amplify high-conviction signals | User |
-| DEC-009: No turnover limit | Costs captured in net metrics | User |
+| DEC-010: Yahoo Finance for data | Free, reliable, adjusted prices | Data Platform |
+| DEC-011: Custom backtesting framework | Full control, walk-forward native | Data Platform |
 
 (Full details in Decision_Log.md)
 
@@ -66,14 +102,13 @@
 ### New Risks Identified
 | Risk | Impact | Likelihood | Mitigation |
 |------|--------|------------|------------|
-| Leverage amplifies losses | H | M | 25% DD hard limit, position sizing |
-| Short squeeze risk | M | L | QQQ highly liquid, easy to borrow |
-| Margin calls with 3x leverage | H | M | Monitor margin utilization |
+| Python 3.9 yfinance incompatibility | M | H | Upgrade Python or use CSV download |
+| Synthetic data not representative | M | M | Priority: get real data working |
 
 ### Active Blockers
 | Blocker | Impact | Owner | Resolution Plan |
 |---------|--------|-------|-----------------|
-| None | - | - | - |
+| yfinance Python version | M | Data Platform | Upgrade to Python 3.10+ |
 
 ---
 
@@ -82,52 +117,51 @@
 | Phase | Status | Notes |
 |-------|--------|-------|
 | Phase 0: Charter | ✅ PASSED | Signed off 2025-12-23 |
-| Phase 1: Literature | 🔄 IN PROGRESS | Started 2025-12-23 |
-| Phase 2: Data Foundation | ⬜ NOT STARTED | |
-| Phase 3: Expert Library | ⬜ NOT STARTED | |
-| Phase 4: Regime Detection | ⬜ NOT STARTED | |
+| Phase 1: Literature | ✅ PASSED | All research docs complete |
+| Phase 2: Data Foundation | 🔄 IN PROGRESS | Framework complete, real data pending |
+| Phase 3: Expert Library | 🔄 IN PROGRESS | 21/21 experts implemented |
+| Phase 4: Regime Detection | 🔄 STARTED | Module complete, calibration pending |
 | Phase 5: Meta-Allocation | ⬜ NOT STARTED | |
 | Phase 6: Validation | ⬜ NOT STARTED | |
 | Phase 7: Paper Trading | ⬜ NOT STARTED | |
 
 ---
 
-## Next Week Plan
+## Next Steps
 
-### Goals
-1. Complete QQQ historical regime analysis (2000-2024)
-2. Complete TA indicator literature survey
-3. Identify 3+ regime detection approaches
-4. Decide on QQQ data source (DEC-010)
+### Immediate Priorities
+1. Fix yfinance/data acquisition (upgrade Python or alternative source)
+2. Run full backtest suite on real QQQ data
+3. Document expert performance by regime
+4. Begin Phase 4 regime calibration
 
 ### Experiments Queued
 | Experiment ID | Hypothesis | Owner |
 |---------------|------------|-------|
-| EXP-001 | Baseline performance (will update for leverage/short) | Quant Research |
+| EXP-001 | Baseline performance on real data | Quant Research |
+| EXP-002 | Expert performance by category | Quant Research |
 | EXP-006 | Regime detection accuracy | ML/Stats |
-
-### Decisions Needed
-| Topic | Options | Owner | Deadline |
-|-------|---------|-------|----------|
-| DEC-010: QQQ data source | Yahoo, Alpha Vantage, Polygon | Data Platform | Week 1 |
-| DEC-011: Backtesting framework | Custom, Backtrader, VectorBT | Data Platform | Week 2 |
 
 ---
 
 ## Hygiene Check Results
 
 ### Leakage Checklist
-- [x] N/A - No data processing yet
+- [x] All strategies use idx parameter (no look-ahead)
+- [x] Walk-forward validation implemented
+- [x] Data hash versioning in place
 
 ### Experiment Registry
 - [x] All experiments pre-registered
-- [x] No completed experiments yet
-- [x] No "silent tuning" detected
+- [x] Backtest runs logged with timestamps
+- [x] Results saved to results/ directory
 
 ### Cost Model
-- [x] Updated with margin interest (6-8% annual)
-- [x] Updated with borrow costs (0.5-1% annual)
-- [ ] Full implementation pending Phase 3
+- [x] Commission: $0.005/share
+- [x] Slippage: 2 bps
+- [x] Margin interest: 7% annual
+- [x] Borrow cost: 0.5% annual
+- [ ] Stress testing (2x, 3x) pending
 
 ---
 
@@ -136,38 +170,34 @@
 ### Stream Status
 | Stream | Lead | Status | Key Items |
 |--------|------|--------|-----------|
-| PMO/Governance | pmo-governance | 🟢 Active | Phase 0 complete, Phase 1 started |
-| Quant Research | quant-research | 🟢 Active | Literature review starting |
-| Data Platform | data-platform | 🟡 Pending | Awaiting data source decision |
-| ML/Stats | ml-stats | 🟢 Active | Regime detection survey starting |
-| Execution Eng | execution-engineering | ⬜ Standby | Awaiting Phase 3 |
+| PMO/Governance | pmo-governance | 🟢 Active | Phases 0-1 complete |
+| Quant Research | quant-research | 🟢 Active | 21 experts implemented |
+| Data Platform | data-platform | 🟡 Blocked | yfinance issue |
+| ML/Stats | ml-stats | 🟢 Active | Regime detection complete |
+| Execution Eng | execution-engineering | 🟢 Active | Cost model complete |
 | Validation | independent-validation | ⬜ Standby | Awaiting Phase 6 |
 | SRE/DevOps | sre-devops | ⬜ Standby | Awaiting Phase 7 |
 
 ---
 
-## QQQ Strategy Summary (Updated)
+## Code Statistics
 
-| Parameter | Value |
-|-----------|-------|
-| Asset | QQQ (Nasdaq-100 ETF) |
-| Capital | $500,000 |
-| Max Drawdown | 25% ($125,000) |
-| Positions | Long (up to 3x), Short (up to 3x), or Cash |
-| Leverage | Up to 3.0x |
-| Turnover | No limit |
-| Signal Frequency | Daily |
-| TA Experts | 20+ (all major indicators) |
-| Baselines | 5 (B&H, 200MA, Golden Cross, RSI, Vol-Target) |
-| Experiments | 8 pre-registered (~545 trials) |
+| Metric | Value |
+|--------|-------|
+| Python files | 16 |
+| Lines of code | ~3,500 |
+| Strategy classes | 24 (21 experts + 3 baselines) |
+| Test backtests run | 9 |
+| Git commits | 6 |
 
 ---
 
-## Week 0 Archive
+## Week 1 Archive
 
-Previous week's report archived. Key accomplishments:
-- Project initialized with QQQ focus
-- All 7 living documents created
-- 8 decisions documented
-- 20 risks identified
-- 8 experiments pre-registered
+Key accomplishments this week:
+- Phase 0 and Phase 1 complete
+- 21 expert strategies implemented across 5 categories
+- Backtesting framework with walk-forward validation
+- Regime detection module with 4 approaches
+- Cost model with margin and borrow costs
+- Initial backtest runs on synthetic data
