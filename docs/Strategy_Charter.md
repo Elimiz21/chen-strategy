@@ -33,7 +33,7 @@ The hypothesis is REJECTED if:
 
 ### In Scope
 - **Asset:** QQQ (Invesco QQQ Trust - Nasdaq-100 ETF) ONLY
-- **Universe:** Single instrument - long QQQ or cash (no shorting)
+- **Universe:** Single instrument - long QQQ, short QQQ, or cash
 - **Capital:** $500,000 deployment target
 - **Time horizon:** Daily signals, rebalance as needed (when regime/signal changes)
 - **Regime types:**
@@ -67,18 +67,16 @@ The hypothesis is REJECTED if:
 
 ### Out of Scope
 - Any instrument other than QQQ
-- Shorting QQQ
 - Options or derivatives on QQQ
-- Leverage (1x only)
 - High-frequency trading (< 1 day holding)
 - Fundamental data
 - Alternative data (sentiment, news)
 
 ### Constraints
-- **Maximum leverage:** 1.0x (no leverage)
+- **Maximum leverage:** 3.0x
 - **Maximum drawdown:** 25% HARD LIMIT
-- **Positions:** Long QQQ or 100% cash only
-- **Maximum turnover:** 50x annual (approximately 1 trade per week average)
+- **Positions:** Long QQQ (up to 3x), Short QQQ (up to 3x), or cash
+- **Maximum turnover:** No limit
 - **Minimum position hold:** 1 day
 - **Capital:** $500,000
 
@@ -120,7 +118,7 @@ Meta-allocation must:
 |--------|------------------|--------|
 | Win Rate | > 50% | > 55% |
 | Profit Factor | > 1.3 | > 1.8 |
-| Annual Turnover | < 50x | < 25x |
+| Annual Turnover | No limit | Track only |
 | Time in Market | > 30% | 50-70% |
 | Recovery Factor | > 3.0 | > 5.0 |
 
@@ -215,8 +213,8 @@ Meta-allocation must:
 |-------------|------|------|----------|
 | Trade multiple ETFs | Diversification | Complexity, more data | Rejected - QQQ only |
 | Include options | Defined risk | Complexity, costs | Rejected - stock only |
-| Allow shorting | Profit in downtrends | Higher risk, costs | Rejected - long/cash only |
-| Use leverage | Higher returns | Higher DD, costs | Rejected - 1x only |
+| Allow shorting | Profit in downtrends | Higher risk, borrow costs | **Accepted** - short allowed up to 3x |
+| Use leverage | Higher returns | Higher DD, margin costs | **Accepted** - up to 3x leverage |
 | Intraday trading | More signals | Higher costs, complexity | Rejected - daily only |
 
 ---
@@ -229,8 +227,13 @@ Meta-allocation must:
 | Bid-Ask Spread | ~$0.01/share | QQQ highly liquid |
 | Slippage | ~0.01% | Conservative for $500K |
 | Market Impact | ~0% | Negligible for QQQ size |
+| Margin Interest (Long) | ~6-8% annual | For leveraged long positions |
+| Borrow Cost (Short) | ~0.5-1% annual | QQQ easy to borrow |
+| Short Locate Fee | ~$0 | QQQ on easy-to-borrow list |
 
 **Estimated Round-Trip Cost:** ~0.02% or ~$100 per $500K trade
+**Leverage Cost (3x long):** ~0.02% daily (~6% annual on borrowed amount)
+**Short Cost:** ~0.003% daily (~1% annual on short value)
 
 ---
 

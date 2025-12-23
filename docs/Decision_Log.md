@@ -96,39 +96,42 @@
 
 ---
 
-### DEC-005: Long-Only with Cash Alternative
+### DEC-005: Long/Short with Cash Alternative
 - **Date:** 2025-12-22
-- **Decision:** Positions limited to long QQQ or 100% cash (no shorting)
+- **Updated:** 2025-12-23
+- **Decision:** Positions can be long QQQ (up to 3x), short QQQ (up to 3x), or cash
 - **Options Considered:**
-  1. Long/cash only (chosen)
-  2. Long/short QQQ
+  1. Long/cash only
+  2. Long/short QQQ (chosen)
   3. Long/short with options for hedging
 - **Rationale:**
-  - Simpler execution and lower costs
-  - No borrow costs or short squeeze risk
-  - Cash provides safe haven during adverse regimes
-  - Shorting increases complexity and risk without clear benefit given 5% DD constraint
-- **Owner:** COO Agent
+  - Shorting allows profiting from bear regimes
+  - QQQ is easy to borrow with low borrow costs (~0.5-1% annual)
+  - More tools for regime-aware allocation
+  - Enables true market-neutral positioning when regime is uncertain
+- **Owner:** User/Sponsor
 - **Evidence:** Strategy_Charter.md §2
-- **Status:** Active
+- **Status:** Active (Updated from long-only)
 
 ---
 
-### DEC-006: No Leverage
+### DEC-006: Up to 3x Leverage Allowed
 - **Date:** 2025-12-22
-- **Decision:** Maximum leverage of 1.0x (no leverage)
+- **Updated:** 2025-12-23
+- **Decision:** Maximum leverage of 3.0x (long or short)
 - **Options Considered:**
-  1. 1.0x (no leverage) - chosen
-  2. 1.5x leverage
-  3. 2.0x leverage (TQQQ equivalent)
+  1. 1.0x (no leverage)
+  2. 2.0x leverage
+  3. 3.0x leverage (chosen)
 - **Rationale:**
-  - Leverage incompatible with 25% max DD constraint
-  - Leverage increases costs (margin interest)
-  - Simpler risk management without leverage
-  - Can always add leverage later if strategy proves robust
-- **Owner:** COO Agent
+  - Leverage allows amplifying high-conviction regime signals
+  - 3x provides flexibility similar to TQQQ/SQQQ without ETF decay
+  - Must be balanced against 25% max DD constraint
+  - Margin costs (~6-8% annual) manageable for short holding periods
+  - Enables more aggressive positioning in clear regime signals
+- **Owner:** User/Sponsor
 - **Evidence:** Strategy_Charter.md §2
-- **Status:** Active
+- **Status:** Active (Updated from no leverage)
 
 ---
 
@@ -170,13 +173,31 @@
 
 ---
 
+### DEC-009: No Turnover Limit
+- **Date:** 2025-12-23
+- **Decision:** No maximum turnover constraint
+- **Options Considered:**
+  1. 50x annual limit
+  2. 100x annual limit
+  3. No limit (chosen)
+- **Rationale:**
+  - With leverage and shorting allowed, turnover may naturally be higher
+  - Costs are already captured in net-of-cost performance metrics
+  - Let the strategy optimize for returns, not turnover
+  - Track turnover as a metric but don't constrain it
+- **Owner:** User/Sponsor
+- **Evidence:** Strategy_Charter.md §2
+- **Status:** Active
+
+---
+
 ## Pending Decisions
 
 | ID | Topic | Options | Owner | Due |
 |----|-------|---------|-------|-----|
-| DEC-009 | QQQ data source | Yahoo Finance, Alpha Vantage, Polygon, etc. | Data Platform | Week 1 |
-| DEC-010 | Backtesting framework | Custom, Backtrader, Zipline, VectorBT | Data Platform | Week 2 |
-| DEC-011 | Regime detection approach | HMM, Rules-based, ML classification | ML/Stats | Week 6 |
-| DEC-012 | Paper trading platform | IBKR, Alpaca, Custom simulation | Execution Eng | Week 12 |
-| DEC-013 | Live broker selection | IBKR, Alpaca, Schwab, etc. | Execution Eng | Week 17 |
+| DEC-010 | QQQ data source | Yahoo Finance, Alpha Vantage, Polygon, etc. | Data Platform | Week 1 |
+| DEC-011 | Backtesting framework | Custom, Backtrader, Zipline, VectorBT | Data Platform | Week 2 |
+| DEC-012 | Regime detection approach | HMM, Rules-based, ML classification | ML/Stats | Week 6 |
+| DEC-013 | Paper trading platform | IBKR, Alpaca, Custom simulation | Execution Eng | Week 12 |
+| DEC-014 | Live broker selection | IBKR, Alpaca, Schwab, etc. | Execution Eng | Week 17 |
 
