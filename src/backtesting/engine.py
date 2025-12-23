@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-from ..strategies.base import ExpertStrategy, Signal, StrategyResult
+from strategies.base import ExpertStrategy, Signal, StrategyResult
 from .cost_model import CostModel
 from .metrics import PerformanceMetrics, calculate_metrics
 
