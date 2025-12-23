@@ -150,6 +150,16 @@ def run_single_backtest(
     strategy_class = STRATEGIES[strategy_name]
     strategy = strategy_class()
 
+    # BuyAndHold uses no drawdown limit (true buy-and-hold benchmark)
+    if strategy_name == "BuyAndHold":
+        config = BacktestConfig(
+            initial_capital=config.initial_capital,
+            max_leverage=config.max_leverage,
+            max_drawdown=1.0,  # 100% = no limit
+            warmup_period=config.warmup_period,
+            rebalance_frequency=config.rebalance_frequency,
+        )
+
     engine = BacktestEngine(config=config)
     result = engine.run(strategy, data, regimes=regimes)
 

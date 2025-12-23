@@ -115,11 +115,16 @@ class BacktestEngine:
             current_equity = equity[idx - 1]
             target_shares = (target_position * current_equity) / current_price
 
-            shares_delta = target_shares - current_shares
+            # Only trade if target position (leverage) changed, not just dollar amount
+            # This prevents constant rebalancing for buy-and-hold strategies
+            prev_position = positions[idx - 1] if idx > self.config.warmup_period else 0.0
+            position_changed = abs(target_position - prev_position) > 0.001
+
+            shares_delta = target_shares - current_shares if position_changed else 0.0
 
             # 4. Execute trade if position changed
             trade_cost = 0.0
-            if abs(shares_delta) > 0:
+            if position_changed and abs(shares_delta) > 0:
                 trade_cost = self.cost_model.calculate_trade_cost(
                     shares_delta, current_price
                 )

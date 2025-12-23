@@ -184,6 +184,20 @@ class BaselineStrategy(ExpertStrategy):
         )
         super().__init__(config)
 
+    def get_position_size(
+        self,
+        signal: Signal,
+        confidence: float,
+        max_leverage: float = 3.0,
+    ) -> float:
+        """
+        Baseline strategies use 1x leverage (no leverage).
+        This ensures fair comparison with buy-and-hold.
+        """
+        if signal == Signal.CASH:
+            return 0.0
+        return 1.0 if signal == Signal.LONG else -1.0
+
 
 class BuyAndHoldStrategy(BaselineStrategy):
     """Always long QQQ baseline."""
