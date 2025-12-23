@@ -1,0 +1,39 @@
+# Adaptive Regime-Aware Trading System - QQQ Focus
+# Requirements for research and backtesting
+
+# Data
+yfinance>=0.2.36
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Technical Analysis
+ta-lib>=0.4.28
+pandas-ta>=0.3.14b
+
+# ML/Stats
+scikit-learn>=1.3.0
+hmmlearn>=0.3.0
+scipy>=1.11.0
+statsmodels>=0.14.0
+
+# Backtesting
+vectorbt>=0.26.0
+
+# Visualization
+matplotlib>=3.7.0
+plotly>=5.18.0
+seaborn>=0.13.0
+
+# Utilities
+tqdm>=4.66.0
+python-dotenv>=1.0.0
+pyyaml>=6.0.0
+
+# Development
+pytest>=7.4.0
+black>=23.0.0
+isort>=5.12.0
+
+# Jupyter (for research)
+jupyter>=1.0.0
+ipykernel>=6.25.0
