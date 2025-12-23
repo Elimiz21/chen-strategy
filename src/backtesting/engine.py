@@ -89,7 +89,8 @@ class BacktestEngine:
         daily_returns = np.zeros(n)
         daily_costs = np.zeros(n)
 
-        equity[0] = self.config.initial_capital
+        # Initialize equity for warmup period
+        equity[:self.config.warmup_period] = self.config.initial_capital
         current_position = 0.0  # In shares
         current_shares = 0.0
         trades: List[Dict[str, Any]] = []
@@ -180,9 +181,6 @@ class BacktestEngine:
                     })
                     current_shares = 0.0
                     positions[idx] = 0.0
-
-        # Fill warmup period with initial capital
-        equity[:self.config.warmup_period] = self.config.initial_capital
 
         # Create result series
         equity_series = pd.Series(equity, index=data.index, name="equity")

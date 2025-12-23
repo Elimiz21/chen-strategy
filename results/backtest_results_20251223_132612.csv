@@ -1,0 +1,4 @@
+strategy,total_return,annualized_return,sharpe_ratio,sortino_ratio,max_drawdown,calmar_ratio,num_trades,win_rate,profit_factor,total_costs,avg_holding_period
+BuyAndHold,0.0,0.0,0,0,0.0,0,0,0.0,inf,0.0,6576.0
+SMA200,0.0,0.0,0,0,0.0,0,632,0.0,inf,0.0,28.51219512195122
+GoldenCrossBaseline,0.0,0.0,0,0,0.0,0,121,0.0,inf,0.0,173.45
