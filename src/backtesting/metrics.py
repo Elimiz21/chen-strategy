@@ -11,6 +11,10 @@ import pandas as pd
 import numpy as np
 
 
+# Survivorship bias adjustment for QQQ (1.5% annual as per red team analysis)
+SURVIVORSHIP_BIAS_ANNUAL = 0.015
+
+
 @dataclass
 class PerformanceMetrics:
     """
@@ -44,6 +48,10 @@ class PerformanceMetrics:
     gross_return: float
     net_return: float
 
+    # Bias-adjusted metrics
+    bias_adjusted_return: Optional[float] = None
+    bias_adjusted_sharpe: Optional[float] = None
+
     # Regime performance
     bull_return: Optional[float] = None
     bear_return: Optional[float] = None
@@ -71,6 +79,8 @@ class PerformanceMetrics:
             "total_costs": self.total_costs,
             "gross_return": self.gross_return,
             "net_return": self.net_return,
+            "bias_adjusted_return": self.bias_adjusted_return,
+            "bias_adjusted_sharpe": self.bias_adjusted_sharpe,
             "bull_return": self.bull_return,
             "bear_return": self.bear_return,
             "sideways_return": self.sideways_return,
@@ -209,6 +219,12 @@ def calculate_metrics(
                 else:
                     sideways_return = regime_ann_ret
 
+    # Survivorship bias adjustment
+    # Apply 1.5% annual haircut to account for index rebalancing bias
+    bias_adjusted_ann_return = annualized_return - SURVIVORSHIP_BIAS_ANNUAL
+    bias_adjusted_excess = bias_adjusted_ann_return - risk_free_rate
+    bias_adjusted_sharpe = bias_adjusted_excess / annualized_vol if annualized_vol > 0 else 0
+
     return PerformanceMetrics(
         total_return=total_return,
         annualized_return=annualized_return,
@@ -229,6 +245,8 @@ def calculate_metrics(
         total_costs=total_costs,
         gross_return=gross_return,
         net_return=total_return,
+        bias_adjusted_return=bias_adjusted_ann_return,
+        bias_adjusted_sharpe=bias_adjusted_sharpe,
         bull_return=bull_return,
         bear_return=bear_return,
         sideways_return=sideways_return,

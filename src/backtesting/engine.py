@@ -21,10 +21,13 @@ class BacktestConfig:
     """Configuration for backtest run."""
 
     initial_capital: float = 500_000.0
-    max_leverage: float = 3.0
-    max_drawdown: float = 0.25  # 25% hard limit
+    max_leverage: float = 2.0  # Reduced from 3.0 for safety
+    max_drawdown: float = 0.20  # 20% hard limit (tighter for intraday gaps)
     warmup_period: int = 200  # Days for indicator warmup
     rebalance_frequency: str = "daily"  # daily, weekly, monthly
+    cooldown_days: int = 5  # Days to stay in cash after forced liquidation
+    use_intraday_dd: bool = True  # Use daily low for drawdown check
+    dynamic_leverage: bool = True  # Reduce leverage as DD approaches limit
 
 
 @dataclass
@@ -94,22 +97,42 @@ class BacktestEngine:
         current_position = 0.0  # In shares
         current_shares = 0.0
         trades: List[Dict[str, Any]] = []
+        cooldown_until = 0  # Index until which we stay in cash
+        peak_equity = self.config.initial_capital
 
         # Walk forward through data
         for idx in range(self.config.warmup_period, n):
             current_price = data["close"].iloc[idx]
             prev_price = data["close"].iloc[idx - 1]
+            today_low = data["low"].iloc[idx]
 
             # 1. Generate signal (using only past data)
             result = strategy.generate_signal(data, idx)
             signals[idx] = result.signal.value
 
-            # 2. Determine target position
-            target_position = strategy.get_position_size(
-                result.signal,
-                result.confidence,
-                max_leverage=self.config.max_leverage,
-            )
+            # Check if we're in cooldown period
+            if idx < cooldown_until:
+                # Force to cash during cooldown
+                target_position = 0.0
+            else:
+                # 2. Determine target position
+                base_leverage = self.config.max_leverage
+
+                # Dynamic leverage: reduce as drawdown increases
+                if self.config.dynamic_leverage and peak_equity > 0:
+                    current_dd_pct = (peak_equity - equity[idx - 1]) / peak_equity
+                    if current_dd_pct > 0.15:  # Above 15% DD
+                        # Reduce leverage proportionally
+                        leverage_reduction = min(1.0, (current_dd_pct - 0.10) / 0.10)
+                        base_leverage = max(1.0, self.config.max_leverage * (1 - leverage_reduction))
+                    elif current_dd_pct > 0.10:  # Above 10% DD
+                        base_leverage = self.config.max_leverage * 0.75
+
+                target_position = strategy.get_position_size(
+                    result.signal,
+                    result.confidence,
+                    max_leverage=base_leverage,
+                )
 
             # 3. Calculate position change
             current_equity = equity[idx - 1]
@@ -165,11 +188,22 @@ class BacktestEngine:
             daily_costs[idx] = total_cost
             positions[idx] = target_position
 
-            # 8. Check drawdown limit
-            peak_equity = equity[:idx + 1].max()
-            current_dd = (peak_equity - equity[idx]) / peak_equity
+            # 8. Update peak equity
+            if equity[idx] > peak_equity:
+                peak_equity = equity[idx]
+
+            # 9. Check drawdown limit (use intraday low if enabled)
+            if self.config.use_intraday_dd and current_shares != 0:
+                # Estimate worst-case equity using today's low
+                intraday_price_change = (today_low - prev_price) / prev_price
+                intraday_pnl = current_shares * prev_price * intraday_price_change
+                worst_equity = equity[idx - 1] + intraday_pnl - total_cost
+                current_dd = (peak_equity - worst_equity) / peak_equity if peak_equity > 0 else 0
+            else:
+                current_dd = (peak_equity - equity[idx]) / peak_equity if peak_equity > 0 else 0
+
             if current_dd > self.config.max_drawdown:
-                # Force to cash
+                # Force to cash and start cooldown
                 if current_shares != 0:
                     liquidation_cost = self.cost_model.calculate_trade_cost(
                         current_shares, current_price
@@ -183,9 +217,12 @@ class BacktestEngine:
                         "price": current_price,
                         "cost": liquidation_cost,
                         "position_after": 0.0,
+                        "cooldown_days": self.config.cooldown_days,
                     })
                     current_shares = 0.0
                     positions[idx] = 0.0
+                    # Start cooldown period
+                    cooldown_until = idx + self.config.cooldown_days
 
         # Create result series
         equity_series = pd.Series(equity, index=data.index, name="equity")
