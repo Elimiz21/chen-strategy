@@ -1,0 +1,218 @@
+{
+  "RulesBased": {
+    "regime_distribution": {
+      "BULL_NORMAL_VOL": 67.57025615518528,
+      "TRANSITION": 16.637652325292215,
+      "BEAR_NORMAL_VOL": 8.85351902511813,
+      "BULL_LOW_VOL": 5.396667495647849,
+      "BULL_HIGH_VOL": 1.0693857249440437,
+      "BEAR_LOW_VOL": 0.2735637901019647,
+      "BEAR_HIGH_VOL": 0.19895548371051977
+    },
+    "persistence": {
+      "TRANSITION": {
+        "count": 49,
+        "avg_duration": 13.653061224489797,
+        "min_duration": 1.0,
+        "max_duration": 252.0,
+        "total_days": 669,
+        "pct_of_time": 16.637652325292215
+      },
+      "BULL_LOW_VOL": {
+        "count": 31,
+        "avg_duration": 7.0,
+        "min_duration": 1.0,
+        "max_duration": 22.0,
+        "total_days": 217,
+        "pct_of_time": 5.396667495647849
+      },
+      "BULL_NORMAL_VOL": {
+        "count": 60,
+        "avg_duration": 45.28333333333333,
+        "min_duration": 1.0,
+        "max_duration": 351.0,
+        "total_days": 2717,
+        "pct_of_time": 67.57025615518528
+      },
+      "BEAR_HIGH_VOL": {
+        "count": 1,
+        "avg_duration": 8.0,
+        "min_duration": 8.0,
+        "max_duration": 8.0,
+        "total_days": 8,
+        "pct_of_time": 0.19895548371051977
+      },
+      "BEAR_NORMAL_VOL": {
+        "count": 14,
+        "avg_duration": 25.428571428571427,
+        "min_duration": 1.0,
+        "max_duration": 203.0,
+        "total_days": 356,
+        "pct_of_time": 8.85351902511813
+      },
+      "BULL_HIGH_VOL": {
+        "count": 9,
+        "avg_duration": 4.777777777777778,
+        "min_duration": 1.0,
+        "max_duration": 18.0,
+        "total_days": 43,
+        "pct_of_time": 1.0693857249440437
+      },
+      "BEAR_LOW_VOL": {
+        "count": 4,
+        "avg_duration": 2.75,
+        "min_duration": 1.0,
+        "max_duration": 6.0,
+        "total_days": 11,
+        "pct_of_time": 0.2735637901019647
+      }
+    },
+    "stability": 0.9582193484207908,
+    "n_transitions": 168.0,
+    "unique_regimes": 7
+  },
+  "Threshold": {
+    "regime_distribution": {
+      "BULL_NORMAL_VOL": 42.427256901268336,
+      "BULL_LOW_VOL": 18.652076597861228,
+      "TRANSITION": 16.66252176075603,
+      "BULL_HIGH_VOL": 15.941308132305396,
+      "BEAR_NORMAL_VOL": 3.3076349166873915,
+      "BEAR_LOW_VOL": 1.7657299179308628,
+      "BEAR_HIGH_VOL": 1.2434717731907485
+    },
+    "persistence": {
+      "TRANSITION": {
+        "count": 58,
+        "avg_duration": 11.551724137931034,
+        "min_duration": 1.0,
+        "max_duration": 252.0,
+        "total_days": 670,
+        "pct_of_time": 16.66252176075603
+      },
+      "BULL_LOW_VOL": {
+        "count": 72,
+        "avg_duration": 10.416666666666666,
+        "min_duration": 1.0,
+        "max_duration": 70.0,
+        "total_days": 750,
+        "pct_of_time": 18.652076597861228
+      },
+      "BULL_NORMAL_VOL": {
+        "count": 123,
+        "avg_duration": 13.869918699186991,
+        "min_duration": 1.0,
+        "max_duration": 112.0,
+        "total_days": 1706,
+        "pct_of_time": 42.427256901268336
+      },
+      "BULL_HIGH_VOL": {
+        "count": 53,
+        "avg_duration": 12.09433962264151,
+        "min_duration": 1.0,
+        "max_duration": 63.0,
+        "total_days": 641,
+        "pct_of_time": 15.941308132305396
+      },
+      "BEAR_HIGH_VOL": {
+        "count": 11,
+        "avg_duration": 4.545454545454546,
+        "min_duration": 1.0,
+        "max_duration": 25.0,
+        "total_days": 50,
+        "pct_of_time": 1.2434717731907485
+      },
+      "BEAR_NORMAL_VOL": {
+        "count": 11,
+        "avg_duration": 12.090909090909092,
+        "min_duration": 1.0,
+        "max_duration": 86.0,
+        "total_days": 133,
+        "pct_of_time": 3.3076349166873915
+      },
+      "BEAR_LOW_VOL": {
+        "count": 7,
+        "avg_duration": 10.142857142857142,
+        "min_duration": 1.0,
+        "max_duration": 27.0,
+        "total_days": 71,
+        "pct_of_time": 1.7657299179308628
+      }
+    },
+    "stability": 0.9166873911962199,
+    "n_transitions": 335.0,
+    "unique_regimes": 7
+  },
+  "Hybrid": {
+    "regime_distribution": {
+      "BULL_NORMAL_VOL": 67.57025615518528,
+      "TRANSITION": 16.637652325292215,
+      "BEAR_NORMAL_VOL": 8.85351902511813,
+      "BULL_LOW_VOL": 5.396667495647849,
+      "BULL_HIGH_VOL": 1.0693857249440437,
+      "BEAR_LOW_VOL": 0.2735637901019647,
+      "BEAR_HIGH_VOL": 0.19895548371051977
+    },
+    "persistence": {
+      "TRANSITION": {
+        "count": 49,
+        "avg_duration": 13.653061224489797,
+        "min_duration": 1.0,
+        "max_duration": 252.0,
+        "total_days": 669,
+        "pct_of_time": 16.637652325292215
+      },
+      "BULL_LOW_VOL": {
+        "count": 31,
+        "avg_duration": 7.0,
+        "min_duration": 1.0,
+        "max_duration": 22.0,
+        "total_days": 217,
+        "pct_of_time": 5.396667495647849
+      },
+      "BULL_NORMAL_VOL": {
+        "count": 60,
+        "avg_duration": 45.28333333333333,
+        "min_duration": 1.0,
+        "max_duration": 351.0,
+        "total_days": 2717,
+        "pct_of_time": 67.57025615518528
+      },
+      "BEAR_HIGH_VOL": {
+        "count": 1,
+        "avg_duration": 8.0,
+        "min_duration": 8.0,
+        "max_duration": 8.0,
+        "total_days": 8,
+        "pct_of_time": 0.19895548371051977
+      },
+      "BEAR_NORMAL_VOL": {
+        "count": 14,
+        "avg_duration": 25.428571428571427,
+        "min_duration": 1.0,
+        "max_duration": 203.0,
+        "total_days": 356,
+        "pct_of_time": 8.85351902511813
+      },
+      "BULL_HIGH_VOL": {
+        "count": 9,
+        "avg_duration": 4.777777777777778,
+        "min_duration": 1.0,
+        "max_duration": 18.0,
+        "total_days": 43,
+        "pct_of_time": 1.0693857249440437
+      },
+      "BEAR_LOW_VOL": {
+        "count": 4,
+        "avg_duration": 2.75,
+        "min_duration": 1.0,
+        "max_duration": 6.0,
+        "total_days": 11,
+        "pct_of_time": 0.2735637901019647
+      }
+    },
+    "stability": 0.9582193484207908,
+    "n_transitions": 168.0,
+    "unique_regimes": 7
+  }
+}

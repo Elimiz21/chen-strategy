@@ -1,0 +1,9 @@
+strategy,error
+BBSqueeze,Insufficient data: need at least 262 rows
+DonchianBreakout,Insufficient data: need at least 262 rows
+ParabolicSAR,Insufficient data: need at least 262 rows
+KeltnerBreakout,Insufficient data: need at least 262 rows
+Ichimoku,Insufficient data: need at least 262 rows
+ATRBreakout,Insufficient data: need at least 262 rows
+OBVConfirmation,Insufficient data: need at least 262 rows
+MACDTrend,Insufficient data: need at least 262 rows

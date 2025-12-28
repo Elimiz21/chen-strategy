@@ -1,0 +1,56 @@
+================================================================================
+PHASE 4 VALIDATION REPORT
+Generated: 2025-12-28T21:29:27.031712
+================================================================================
+
+## WALK-FORWARD VALIDATION SUMMARY
+
+Strategies with overfit ratio < 2.0: 8/8
+
+Top 5 by Out-of-Sample Sharpe:
+  BBSqueeze            OOS Sharpe: 16.28 (Decay: -3.87)
+  DonchianBreakout     OOS Sharpe: 13.06 (Decay: -3.58)
+  KeltnerBreakout      OOS Sharpe: 8.46 (Decay: -2.12)
+  ParabolicSAR         OOS Sharpe: 8.04 (Decay: -2.64)
+  ATRBreakout          OOS Sharpe: 7.63 (Decay: -2.29)
+
+## REGIME DETECTION SUMMARY
+
+
+RulesBased:
+  Stability: 95.8%
+  Transitions: 168
+
+Threshold:
+  Stability: 91.7%
+  Transitions: 335
+
+Hybrid:
+  Stability: 95.8%
+  Transitions: 168
+
+## REGIME-DEPENDENCE ANALYSIS (ANOVA)
+
+Strategies with regime-dependent performance: 12/24
+
+Regime-dependent strategies (p < 0.05):
+  GoldenCrossBaseline  (p = 0.0000)
+  KeltnerBreakout      (p = 0.0000)
+  DonchianBreakout     (p = 0.0000)
+  BuyAndHold           (p = 0.0008)
+  VolTargeting         (p = 0.0008)
+  CCIReversal          (p = 0.0015)
+  ATRBreakout          (p = 0.0016)
+  WilliamsR            (p = 0.0017)
+  ADXBreakout          (p = 0.0028)
+  BBSqueeze            (p = 0.0033)
+  MFIReversal          (p = 0.0055)
+  VWAPReversion        (p = 0.0119)
+
+## PHASE 4 CONCLUSIONS
+
+1. Regime detection stability > 80%: PASS
+2. >30% strategies regime-dependent: PASS
+3. >=3 strategies with OOS Sharpe > 0.5: PASS
+
+PHASE 4 OVERALL: PASS
