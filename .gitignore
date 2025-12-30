@@ -38,8 +38,10 @@ env/
 .AppleDouble
 .LSOverride
 
-# Data (regenerated from Yahoo Finance)
-data/
+# Data (most can be regenerated from Yahoo Finance)
+# But keep cached QQQ data for reproducibility
+data/*.parquet
+!data/qqq_*.csv
 
 # Interim results (not final)
 results/backtest_results_*.csv
@@ -51,6 +53,8 @@ results/backtest_results_*.csv
 !results/expert_regime_matrix.csv
 !results/micro_regime_labels.csv
 !results/regime_significance_tests.csv
+!results/phase6_validation_summary.csv
+!results/phase6_validation_detailed.json
 
 # Jupyter
 .ipynb_checkpoints/
