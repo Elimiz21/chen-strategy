@@ -1,0 +1,2 @@
+timestamp,gate_passed,data_hash,portfolio_sharpe,portfolio_max_dd,subperiod_stability_passed,cost_sensitivity_passed,max_dd_constraint_passed,model_risk_passed,is_sharpe,oos_sharpe,sharpe_decay_pct
+2025-12-30T23:56:16.303379,True,6f235e10bfef093a,8.782108411515171,-0.026719055559375243,True,True,True,True,8.616357937528543,8.761990490420928,-1.6901868973906327

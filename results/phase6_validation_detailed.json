@@ -1,0 +1,233 @@
+{
+  "replication": {
+    "passed": true,
+    "details": [],
+    "data_hash": "6f235e10bfef093a",
+    "data_rows": 6288,
+    "portfolio_sharpe": 8.782108411515171,
+    "portfolio_max_dd": -0.026719055559375243,
+    "portfolio_ann_return": 1.145927733052321,
+    "strategy_results": {
+      "BBSqueeze": {
+        "sharpe": 7.237298157322436,
+        "max_dd": -0.04509290718257965,
+        "ann_return": 0.8604483631485698
+      },
+      "DonchianBreakout": {
+        "sharpe": 5.904849337953391,
+        "max_dd": -0.00048007611432575846,
+        "ann_return": 0.7559422550730215
+      },
+      "KeltnerBreakout": {
+        "sharpe": 4.420041307578821,
+        "max_dd": -0.033903297723833506,
+        "ann_return": 0.4785639388394378
+      },
+      "Ichimoku": {
+        "sharpe": 4.055926341205075,
+        "max_dd": -0.0983754466542877,
+        "ann_return": 0.72942281103421
+      },
+      "ParabolicSAR": {
+        "sharpe": 3.9128979080715895,
+        "max_dd": -0.25897933742582996,
+        "ann_return": 0.9284426014090981
+      },
+      "TrendEnsemble": {
+        "sharpe": 3.2023995082700574,
+        "max_dd": -0.1190447072231946,
+        "ann_return": 0.5472125657422067
+      },
+      "RORO": {
+        "sharpe": 2.026652611178154,
+        "max_dd": -0.1146825585217118,
+        "ann_return": 0.36136172968684876
+      }
+    }
+  },
+  "subperiod_stability": {
+    "passed": true,
+    "subperiods": [
+      {
+        "name": "Dot-com crash & recovery",
+        "start": "2000-01-01",
+        "end": "2005-12-31",
+        "sharpe": 7.5688566659729375,
+        "ann_return": 1.006316571513005,
+        "max_dd": -0.026719055559375243,
+        "passed": "True"
+      },
+      {
+        "name": "Financial crisis",
+        "start": "2006-01-01",
+        "end": "2009-12-31",
+        "sharpe": 7.203754594254548,
+        "ann_return": 0.8966336136422306,
+        "max_dd": -0.02335167067307295,
+        "passed": "True"
+      },
+      {
+        "name": "Post-crisis bull",
+        "start": "2010-01-01",
+        "end": "2015-12-31",
+        "sharpe": 7.864941644085711,
+        "ann_return": 0.8564848646469896,
+        "max_dd": -0.02355432947971039,
+        "passed": "True"
+      },
+      {
+        "name": "Late cycle bull",
+        "start": "2016-01-01",
+        "end": "2019-12-31",
+        "sharpe": 6.918212993132168,
+        "ann_return": 0.7463839712215712,
+        "max_dd": -0.022608167382524528,
+        "passed": "True"
+      },
+      {
+        "name": "COVID & aftermath",
+        "start": "2020-01-01",
+        "end": "2024-12-31",
+        "sharpe": 7.770451279332815,
+        "ann_return": 1.0272039760092166,
+        "max_dd": -0.02282779439554539,
+        "passed": "True"
+      }
+    ],
+    "sharpe_mean": 7.465243435355636,
+    "sharpe_std": 0.3553209553026041,
+    "sharpe_min": 6.918212993132168,
+    "max_dd_worst": -0.026719055559375243
+  },
+  "parameter_sensitivity": {
+    "passed": true,
+    "sensitivity": {
+      "leverage": [
+        {
+          "leverage": 1.0,
+          "sharpe": 6.478454117612171,
+          "ann_return": 0.6567514671113792,
+          "max_dd": -0.030623573430011486
+        },
+        {
+          "leverage": 1.5,
+          "sharpe": 7.646340153141423,
+          "ann_return": 1.1216267858257574,
+          "max_dd": -0.04576004222404286
+        },
+        {
+          "leverage": 2.0,
+          "sharpe": 8.948001515787928,
+          "ann_return": 1.700827731587609,
+          "max_dd": -0.060779720131474146
+        },
+        {
+          "leverage": 2.5,
+          "sharpe": 10.429946499024592,
+          "ann_return": 2.411539350893812,
+          "max_dd": -0.07568267300596312
+        }
+      ],
+      "weights": [
+        {
+          "name": "Baseline",
+          "sharpe": 8.948001515787928,
+          "max_dd": -0.060779720131474146
+        },
+        {
+          "name": "BBSqueeze +10%",
+          "sharpe": 9.445472069178221,
+          "max_dd": -0.0679454752638711
+        },
+        {
+          "name": "Equal Weight",
+          "sharpe": 7.799332272048409,
+          "max_dd": -0.09741139593017858
+        },
+        {
+          "name": "Defensive Tilt",
+          "sharpe": 7.7151356720967765,
+          "max_dd": -0.05703560821566067
+        }
+      ]
+    }
+  },
+  "cost_sensitivity": {
+    "passed": true,
+    "cost_tests": [
+      {
+        "multiplier": 1.0,
+        "sharpe": 8.948001515787928,
+        "ann_return": 1.700827731587609,
+        "max_dd": -0.060779720131474146,
+        "passed": "True"
+      },
+      {
+        "multiplier": 2.0,
+        "sharpe": 8.65778969489729,
+        "ann_return": 1.644012659019249,
+        "max_dd": -0.06144158273260522,
+        "passed": "True"
+      },
+      {
+        "multiplier": 3.0,
+        "sharpe": 8.387850431013266,
+        "ann_return": 1.5868625674304506,
+        "max_dd": -0.06200445502932839,
+        "passed": "True"
+      },
+      {
+        "multiplier": 5.0,
+        "sharpe": 7.636425907415151,
+        "ann_return": 1.4102205336203282,
+        "max_dd": -0.06331027252752673,
+        "passed": "True"
+      }
+    ],
+    "cost_impact_pct": 3.243314391247992
+  },
+  "max_dd_constraint": {
+    "passed": true,
+    "dd_tests": [
+      {
+        "scenario": "Baseline (2x leverage)",
+        "leverage": 2.0,
+        "max_dd": -0.060779720131474146,
+        "passed": "True"
+      },
+      {
+        "scenario": "High leverage (2.5x)",
+        "leverage": 2.5,
+        "max_dd": -0.07568267300596312,
+        "passed": "True"
+      },
+      {
+        "scenario": "Max leverage (3x)",
+        "leverage": 3.0,
+        "max_dd": -0.09046896674761574,
+        "passed": "True"
+      },
+      {
+        "scenario": "Aggressive weights",
+        "leverage": 2.0,
+        "max_dd": -0.04973362535815504,
+        "passed": "True"
+      }
+    ]
+  },
+  "model_risk": {
+    "passed": true,
+    "risks": [
+      "High correlation: DonchianBreakout-KeltnerBreakout (0.78)",
+      "High correlation: Ichimoku-TrendEnsemble (0.79)"
+    ],
+    "is_sharpe": 8.616357937528543,
+    "oos_sharpe": 8.761990490420928,
+    "sharpe_decay_pct": -1.6901868973906327,
+    "var_95": -0.008080454523096081,
+    "var_99": -0.018422057483529198,
+    "cvar_95": -0.014501271012218427
+  },
+  "gate_passed": true,
+  "timestamp": "2025-12-30T23:56:16.303379"
+}
