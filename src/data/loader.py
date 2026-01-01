@@ -72,11 +72,18 @@ class QQQDataLoader:
         Returns:
             DataFrame with OHLCV data
         """
-        cache_file = self.data_dir / f"qqq_{self.start_date}_{self.end_date}.parquet"
+        cache_parquet = self.data_dir / f"qqq_{self.start_date}_{self.end_date}.parquet"
+        cache_csv = self.data_dir / f"qqq_{self.start_date}_{self.end_date}.csv"
 
-        if cache_file.exists() and not force_refresh:
-            print(f"Loading cached data from {cache_file}")
-            self._data = pd.read_parquet(cache_file)
+        # Check for cached data (parquet preferred, then CSV)
+        if cache_parquet.exists() and not force_refresh:
+            print(f"Loading cached data from {cache_parquet}")
+            self._data = pd.read_parquet(cache_parquet)
+        elif cache_csv.exists() and not force_refresh:
+            print(f"Loading cached data from {cache_csv}")
+            self._data = pd.read_csv(cache_csv, index_col=0, parse_dates=True)
+            # Standardize column names
+            self._data.columns = [c.lower().replace(" ", "_") for c in self._data.columns]
         else:
             if HAS_YFINANCE:
                 print(f"Fetching {self.symbol} data from Yahoo Finance...")
@@ -97,12 +104,11 @@ class QQQDataLoader:
 
             # Save to cache (use CSV if parquet not available)
             try:
-                self._data.to_parquet(cache_file)
-                print(f"Cached data to {cache_file}")
+                self._data.to_parquet(cache_parquet)
+                print(f"Cached data to {cache_parquet}")
             except ImportError:
-                csv_cache = cache_file.with_suffix(".csv")
-                self._data.to_csv(csv_cache)
-                print(f"Cached data to {csv_cache} (parquet not available)")
+                self._data.to_csv(cache_csv)
+                print(f"Cached data to {cache_csv} (parquet not available)")
 
         # Compute hash for versioning
         self._hash = self._compute_hash()

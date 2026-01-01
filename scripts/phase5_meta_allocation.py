@@ -393,7 +393,7 @@ def main():
 
     # Load data
     print("\nLoading QQQ data...")
-    loader = QQQDataLoader(start_date="2010-01-01")
+    loader = QQQDataLoader(start_date="2000-01-01", end_date="2024-12-31")
     data = loader.fetch()
     data = loader.add_returns()
     print(f"  Loaded {len(data)} trading days")

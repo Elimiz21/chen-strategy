@@ -2,9 +2,49 @@
 ## Adaptive Regime-Aware Trading System - QQQ Focus
 
 ### Document Control
-- Version: 1.8
-- Last Updated: 2025-12-30
-- Status: PHASE 6 PASSED, READY FOR PHASE 7
+- Version: 1.9
+- Last Updated: 2026-01-01
+- Status: **CRITICAL BUGS FOUND - ALL RESULTS INVALID**
+
+---
+
+## ⚠️ CRITICAL ISSUE DISCOVERED (2026-01-01)
+
+### Summary
+Two critical bugs were discovered that **invalidate all backtesting results**:
+
+### Bug 1: Data Loader Cache Miss (FIXED)
+- **Issue**: Loader looked for `.parquet` files but cached data was `.csv`
+- **Effect**: System fell back to synthetic data instead of real QQQ prices
+- **Fix**: Updated loader to check for CSV cache as fallback
+- **Status**: ✅ FIXED in `src/data/loader.py`
+
+### Bug 2: Look-Ahead Bias in Backtesting Engine (NOT FIXED)
+- **Issue**: Signal at day `idx` uses `data[:idx+1]` (includes today's close), then P&L calculated using today's return
+- **Effect**: Strategy "knows" today's return when deciding position - **this is look-ahead bias**
+- **Evidence**:
+  - BBSqueeze shows 51.1% next-day prediction accuracy (barely better than random)
+  - But backtest shows Sharpe 14.83 and 470% annual returns
+  - Final equity reaches $655 quintillion (impossible)
+- **Status**: ❌ NOT FIXED - requires engine rewrite
+
+### Impact
+| Metric | Reported | Reality |
+|--------|----------|---------|
+| Portfolio Sharpe | 8.78 | **~0.5 (estimated)** |
+| Annual Return | 114% | **~8-10% (estimated)** |
+| Strategy Edge | Significant | **Marginal (51% accuracy)** |
+
+### Required Actions
+1. Fix backtesting engine: Signal at `idx` should only use `data[:idx]`, P&L should be next day's return
+2. Re-run all Phase 4, 5, 6 validations with corrected engine
+3. Update all documentation with correct results
+
+### Investigation Details
+See conversation log from 2026-01-01 for full analysis including:
+- Manual trace of backtest logic showing look-ahead bias
+- Comparison of signal accuracy (51%) vs backtest returns (impossible)
+- Verification that signal generation correctly uses `data[:idx+1]` but this creates bias when P&L uses same-day return
 
 ---
 
@@ -71,10 +111,11 @@
 - [x] QQQ data 1999-2024 available and versioned
 - [x] All TA indicators computable
 - [x] Backtesting framework reproducible
-- [x] No look-ahead bias in data pipeline
+- [x] ~~No look-ahead bias in data pipeline~~ **⚠️ BUG FOUND: Loader defaulted to synthetic data due to parquet/csv mismatch (FIXED 2026-01-01)**
 - [x] Data quality baseline established (2015-2025 validated)
 
-### Gate Status: ✅ PASSED (2025-12-24)
+### Gate Status: ⚠️ PASSED WITH FIX (2025-12-24, updated 2026-01-01)
+- Data loader bug fixed: Now checks for CSV cache when parquet not found
 
 ---
 
@@ -154,11 +195,11 @@
 | Ichimoku | 5.00 | +1.12 |
 | ParabolicSAR | 4.56 | +0.68 |
 
-### Gate Status: ✅ PASSED (2025-12-24)
-- Expert Panel validated micro-regime approach
-- 5 strategies beat sophisticated academic baselines
-- Regime-conditional performance confirmed across 100 micro-regimes
-- See docs/Expert_Panel_Review.md for complete analysis
+### Gate Status: ❌ INVALIDATED (2026-01-01)
+- ~~Expert Panel validated micro-regime approach~~
+- **CRITICAL**: Strategy performance metrics based on look-ahead bias
+- BBSqueeze Sharpe 10.61 is invalid (actual next-day accuracy: 51.1%)
+- Must be re-run after engine fix
 
 ---
 
@@ -199,7 +240,10 @@
 - Drawdown > 15%: leverage × 0.5
 - Drawdown > 10%: leverage × 0.75
 
-### Gate Status: ✅ PASSED (2025-12-25)
+### Gate Status: ❌ INVALIDATED (2026-01-01)
+- **CRITICAL**: Results based on look-ahead bias in backtesting engine
+- All metrics (Sharpe 8.78, DD -2.7%) are invalid
+- Must be re-run after engine fix
 
 ---
 
@@ -237,10 +281,11 @@
 1. High correlation: DonchianBreakout-KeltnerBreakout (0.78)
 2. High correlation: Ichimoku-TrendEnsemble (0.79)
 
-### Gate Status: ✅ PASSED (2025-12-30)
-- All automated validation criteria met
-- Ready for independent validator sign-off
-- See [Phase6_Validation_Report.md](Phase6_Validation_Report.md) for full details
+### Gate Status: ❌ INVALIDATED (2026-01-01)
+- ~~All automated validation criteria met~~
+- **CRITICAL**: Look-ahead bias discovered in backtesting engine
+- **All results are invalid and must be re-run after engine fix**
+- See Phase Gates Checklist header for details on bugs discovered
 
 ---
 
